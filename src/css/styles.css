@@ -7,6 +7,8 @@
 @import url('./reset.css');
 @import url('./01-gallery.css');
 @import url('./header.css');
+@import url("./02-form.css");
+@import "simplelightbox/dist/simple-lightbox.min.css";
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;

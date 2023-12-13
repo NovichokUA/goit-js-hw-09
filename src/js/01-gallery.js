@@ -1,3 +1,6 @@
+`use strict`;
+import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm.js';
+
 const images = [
   {
     preview:
@@ -96,8 +99,6 @@ for (const img of image) {
   img.style.height = '200px';
   img.style.display = 'block';
 }
-
-import SimpleLightbox from 'simplelightbox';
 
 const gallery = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
