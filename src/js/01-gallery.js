@@ -1,5 +1,5 @@
 `use strict`;
-// import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm.js';
+import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm.js';
 
 const images = [
   {
