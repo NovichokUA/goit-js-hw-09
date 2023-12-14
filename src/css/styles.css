@@ -1,9 +1,3 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
 @import url('./reset.css');
 @import url('./01-gallery.css');
 @import url('./header.css');
