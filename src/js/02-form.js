@@ -1,16 +1,13 @@
-// {
-//   /* <form class="feedback-form" autocomplete="off">
-//   <label class="feedback-label">
-//     Email
-//     <input class="feedback-input-email" type="email" name="email" autofocus />
-//   </label>
-//   <label class="feedback-label text">
-//     Message
-//     <textarea class="message" name="message" rows="8"></textarea>
-//   </label>
-//   <button class="btn-submit" type="submit">Submit</button>
-// </form> */
-// }
+function debounce(callee, timeoutMs) {
+  return function perform(...args) {
+    let previousCall = this.lastCall;
+    this.lastCall = Date.now();
+    if (previousCall && this.lastCall - previousCall <= timeoutMs) {
+      clearTimeout(this.lastCallTimer);
+    }
+    this.lastCallTimer = setTimeout(() => callee(...args), timeoutMs);
+  };
+}
 
 const form = document.querySelector('.feedback-form');
 
@@ -24,38 +21,30 @@ const inputEmail = form.elements.email;
 
 const textArea = form.elements.message;
 
-form.addEventListener('input', getTextValue);
+form.addEventListener('input', debounce(getTextValue, 500));
 form.addEventListener('submit', submitedForm);
 
-let objLocalStorage = JSON.parse(localStorage.getItem(myKeyLocalStorage));
+let dataForm = JSON.parse(localStorage.getItem(myKeyLocalStorage)) || {};
 
-inputEmail.value = objLocalStorage.email ?? '';
-textArea.value = objLocalStorage.message ?? '';
-
-let valueInput = {};
+inputEmail.value = dataForm.email ?? '';
+textArea.value = dataForm.message ?? '';
 
 function getTextValue(event) {
-  valueInput = {
+  dataForm = {
     email: inputEmail.value,
     message: textArea.value,
   };
-  localStorage.setItem(myKeyLocalStorage, JSON.stringify(valueInput));
-  return valueInput;
+  localStorage.setItem(myKeyLocalStorage, JSON.stringify(dataForm));
+  return dataForm;
 }
 
 function submitedForm(event) {
   event.preventDefault();
   if (inputEmail.value !== '' && textArea.value !== '') {
-    console.log(valueInput);
+    console.log(dataForm);
     localStorage.removeItem(myKeyLocalStorage);
     form.reset();
   } else {
     console.log(alert('Заповніть всі поля'));
   }
 }
-
-// const obj = {
-//   name: 'valera',
-//   age: 43,
-// };
-// console.log(obj.name);
